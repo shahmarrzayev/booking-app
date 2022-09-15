@@ -1,0 +1,181 @@
+Rezervasyon hizmeti
+Node.js'yi kullanarak, bir terapistten randevu almak üzere bir kişiyi rezerve etmek için bir API içeren 
+bir hizmet geliştirmeniz gerekir. Sistemin mantığı ücretsiz doktordan randevu içermelidir (bugün için zaten 3'ten 
+fazla randevusu varsa doktordan randevu alamazsınız, randevu almaya çalışırken hata dönecektir).
+
+Aslında randevu için bir kişiyi kaydetmek için bir API yöntemine ihtiyacımız var, bunu girdiye veriyoruz:
+
+Kullanıcı kimliği
+Doktor kimliği
+
+Bir randevu oluşturulmalı, ardından doktor bunu kabul etmeli veya reddetmelidir. 
+Kabul ederse doktorun kabul ettiği randevularda ve kullanıcının randevularında 
+tüm süre boyunca bu randevuyu göstermemiz gerekir, reddederse bu randevu sistemden 
+silinir. Oluşturulan randevunun saati < geçerli saat ise, bu randevu geçmiş ve 
+pasif olarak kabul edilmelidir.
+
+KULLANICI: {
+"id": "uid",
+"e-posta": "dize",
+"reg_token": "dize",
+"photo_avatar": "photo_uri",
+"telefon": "dize",
+"isim": "dize"
+"type": "kullanıcı",
+"randevular": [
+"",
+""
+]
+}
+DOKTOR: {
+"id": "uid",
+"e-posta": "dize",
+"reg_token": "dize",
+"photo_avatar": "photo_uri",
+"telefon": "dize",
+"isim": "dize",
+"tür": "belge",
+"spec": "terapist",
+"ücretsiz": "boole",
+"appointments_accepted": [
+"",
+""
+]
+}
+RANDEVULAR: {
+"yaptım",
+"tarih": "tarih",
+"user": "uid",
+"doktor":"uid",
+"etkin": "boole",
+}
+
+
+Uyarı Hizmeti
+Ayrıca kullanıcıyı bilgilendirecek bir hizmete ihtiyacımız var:
+girişten 1 gün önce
+girişten 2 saat önce
+Hizmetin yalnızca iletileri bir .log dosyasına kaydetmesine izin verin:
+{{ current_date}} | Merhaba {{ user.name }}! Size yarın {{ date }} tarihinde {{doktor.spec }} için planlanmış olduğunuzu hatırlatırız!
+{{ current_date}} | Merhaba {{ user.name }}! {{ date }} tarihinde {{doctor.spec }} adresine gitmek için 2 saatiniz var!
+
+Uygulama için başka bir şey (yöntemler/koleksiyonlar/...herhangi bir şey) gerekiyorsa, eklenmesi yasak değildir. Herhangi bir hata işleme gereklidir.
+
+Yığın gereksinimleri:
+Node.JS (Express\Nest);
+MongoDB;
+daktilo yazısı;
+DİNLENME.
+Proje gereksinimleri:
+Projeyi oluşturmak için npm i && npm run dev;
+Otomatik testler ile örtün.
+Sen
+9 Ağu 2022 19:38
+Anladım, dikkate aldığın için teşekkürler. Bu test görevinin tamamlanması ne kadar sürer?done
+
+
+işverene cevap
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Сервис букинга
+Используя Node.js, необходимо разработать сервис с API для записи человека на прием к терапевту. Логика работы системы должна в себя включать запись к свободному доктору (к доктору нельзя записаться, если у него уже больше 3 записей на сегодня, при попытке записаться будет возвращаться ошибка).
+
+По сути нужен метод API для записи человека на прием, на вход отдаем:
+ID Пользователя
+ID Доктора
+Должен создаться appointment, после чего доктор должен его принять или отклонить. Если он его принимает, то нам необходимо отобразить данный appointment в принятых доктором appointments и в appointments пользователя за все время, если отклоняет, данный appointment удаляется из системы. Если время созданного appointments < текущего времени, то данный appointments стоит считать прошедшим и не активным.
+USER: {
+"id": "uuid",
+"email": "string",
+"reg_token": "string",
+"photo_avatar": "photo_uri",
+"phone": "string",
+"name": "string ",
+"type": "user",
+"appointments": [
+"",
+""
+]
+}
+DOCTOR: {
+"id": "uuid",
+"email": "string",
+"reg_token": "string",
+"photo_avatar": "photo_uri",
+"phone": "string",
+"name": "string",
+"type": "doc",
+"spec": "therapist",
+"free": "boolean",
+"appointments_accepted": [
+"",
+""
+]
+}
+APPOINTMENTS: {
+"id": "id",
+"date": "date",
+"user": "uuid",
+"doctor":"uuid",
+"active": "boolean",
+}
+
+
+Сервис оповещений
+Также нам нужен сервис который будет оповещать пользователя:
+за 1 день до приема
+за 2 часа до приема
+Сам сервис пусть просто логгирует сообщения в .log файл:
+{{ current_date }} | Привет {{ user.name }}! Напоминаем что вы записаны к {{ doctor.spec }} завтра в {{ date }}!
+{{ current_date }} | Привет {{ user.name }}! Вам через 2 часа к {{ doctor.spec }} в {{ date }}!
+
+Если для реализации понадобиться что-то еще (методы/коллекции/...anything), то не запрещено добавлять. Обязательна обработка любых ошибок.
+
+Требования по стеку:
+Node.JS (Express\Nest);
+MongoDB;
+Typescript;
+REST.
+Требования к проекту:
+Для сборки проекта должно быть достаточно выполнить npm i && npm run dev;
+Обложить автотестами.
+You
+9 aug 2022 19:38
+Got it, thanks for your consideration. How long should it take to complete this test task?done
+
+
+Reply to the employer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
